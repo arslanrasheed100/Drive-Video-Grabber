@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Merge video + audio | Drive Grabber</title>
+  <link rel="stylesheet" href="merge.css" />
+  <link rel="stylesheet" href="donate.css" />
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="brand">
+        <img class="logo" src="icons/icon.svg" alt="" />
+        <div>
+          <h1>Merge local files</h1>
+          <p class="muted">Pick a video-only and an audio-only file. The separate video file is silent until they are merged here.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="dlbar" id="dlbar" hidden>
+      <div class="dlbar-head">
+        <strong id="dlTitle">Downloading with Chrome</strong>
+        <span class="muted small" id="dlNote"></span>
+      </div>
+      <div id="dlLines" class="dl-lines"></div>
+    </section>
+
+    <div class="silentnote" id="silentNote" role="note">
+      <button id="silentNoteClose" class="silentclose" type="button"
+        aria-label="Dismiss this note" title="Dismiss">&times;</button>
+      <b>Important: the video file is silent.</b> A video-only file has no audio track.
+      Pick the matching audio file below as well, then click <b>Merge into one file</b>
+      to get one video with both picture and sound.
+    </div>
+
+    <section class="pickers">
+      <label class="drop" id="videoZone">
+        <input type="file" id="videoInput" accept="video/*,.mp4,.m4v,.webm,.mkv,.mov" hidden />
+        <span class="kind">Video</span>
+        <strong id="videoName">Choose or drop a video file</strong>
+        <span class="muted" id="videoMeta">mp4 / m4v / webm / mkv</span>
+      </label>
+
+      <label class="drop" id="audioZone">
+        <input type="file" id="audioInput" accept="audio/*,.m4a,.aac,.mp3,.opus,.ogg,.mp4" hidden />
+        <span class="kind">Audio</span>
+        <strong id="audioName">Choose or drop an audio file</strong>
+        <span class="muted" id="audioMeta">m4a / aac / mp3 / opus</span>
+      </label>
+    </section>
+
+    <div class="pickall">
+      <button id="bothBtn" class="ghost" type="button">Pick both files in one dialog</button>
+      <button id="txtBtn" class="ghost" type="button"
+        title="Pick the .txt page Drive saved, and the real link inside it will be downloaded">Fix a text page</button>
+      <span class="muted small">or drop both files, or a .txt page, anywhere on this page</span>
+      <input type="file" id="bothInput" multiple hidden
+        accept="video/*,audio/*,.mp4,.m4v,.webm,.mkv,.mov,.m4a,.aac,.mp3,.opus,.ogg" />
+      <input type="file" id="txtInput" accept=".txt,.html,.htm,text/plain,text/html" hidden />
+    </div>
+
+    <section class="lengthwarn" id="lengthWarn" hidden role="status">
+      <strong>Check these files</strong>
+      <span id="lengthText"></span>
+    </section>
+
+    <p class="muted small tip">
+      <b>Merge video + audio</b> in the popup downloads the two tracks with Chrome, then opens
+      this page. Already have the files? Pick them here at any time. If a track arrived as a
+      <b>.txt</b> page, use <b>Fix a text page</b> or drop that page here. The page compares
+      both track lengths and warns if they differ by more than 2 seconds.
+    </p>
+
+    <section class="output">
+      <label for="outName" class="muted">Output file name</label>
+      <div class="outrow">
+        <input type="text" id="outName" placeholder="merged.mp4" spellcheck="false" />
+        <span class="muted ext" id="ext">.mp4</span>
+      </div>
+      <p class="muted small" id="containerNote" hidden></p>
+      <p class="muted small">Saves automatically to <code>Downloads/DriveGrabber/</code> (no dialog).</p>
+    </section>
+
+    <section class="statusbox" id="statusBox" hidden>
+      <div id="statusText"></div>
+      <div class="bar" id="bar" hidden><i id="barFill"></i></div>
+    </section>
+
+    <footer>
+      <button id="mergeBtn" class="primary" disabled>Merge into one file</button>
+      <button id="resetBtn" class="ghost">Reset</button>
+    </footer>
+
+    <details class="logwrap" id="logWrap">
+      <summary>ffmpeg log</summary>
+      <pre id="log" class="mono"></pre>
+    </details>
+
+    <p class="muted small foot">
+      Command used: <code id="cmd">ffmpeg -i video.mp4 -i audio.m4a -c copy -map 0:v:0 -map 1:a:0 -movflags +faststart output.mp4</code>
+    </p>
+
+    <p class="muted small foot">
+      Use this only for media you are authorized to save. See the README for the full disclaimer.
+    </p>
+
+    <div class="donate-foot">
+      <button id="donateBtn" class="donate-open" type="button">Donate</button>
+    </div>
+  </div>
+
+  <dialog id="donateDialog" class="donate-dialog" aria-labelledby="donateTitle">
+    <div class="donate-inner">
+      <div class="donate-head">
+        <strong id="donateTitle">Support this project</strong>
+        <button id="donateClose" class="donate-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <p class="donate-lead">This extension is free and open source. If it saved you time, you can send a small donation.</p>
+      <div class="donate-row">
+        <div class="donate-net">BEP20 (BNB Smart Chain)</div>
+        <code>0x93Fe3b08aF6Ed4dc92Cf81A50ca75f36FDCEcE93</code>
+        <button class="donate-copy" type="button" data-copy="0x93Fe3b08aF6Ed4dc92Cf81A50ca75f36FDCEcE93">Copy address</button>
+      </div>
+      <div class="donate-row">
+        <div class="donate-net">TRC20 (Tron)</div>
+        <code>TPTitWXdkDUE9BeUZvL8nZVKscMLZH9eog</code>
+        <button class="donate-copy" type="button" data-copy="TPTitWXdkDUE9BeUZvL8nZVKscMLZH9eog">Copy address</button>
+      </div>
+      <p class="donate-note">Send only assets on the matching network. A wrong network or coin can be lost.</p>
+    </div>
+  </dialog>
+
+  <script src="donate.js"></script>
+  <script src="vendor/ffmpeg/ffmpeg.js"></script>
+  <script src="link.js"></script>
+  <script src="merge.js"></script>
+</body>
+</html>

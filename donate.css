@@ -1,0 +1,139 @@
+/* Donation dialog, shared by the popup and the merge page. */
+
+.donate-foot {
+  text-align: center;
+  padding: 2px 0 0;
+}
+
+.shell .donate-foot {
+  margin-top: 8px;
+}
+
+.donate-open {
+  font: inherit;
+  font-size: 11.5px;
+  background: none;
+  border: 0;
+  color: var(--muted, #8b93a1);
+  padding: 2px 6px;
+  cursor: pointer;
+}
+
+button.donate-open:hover {
+  background: none;
+  color: var(--text, #e8eaee);
+  text-decoration: underline;
+}
+
+.donate-open:active {
+  transform: none;
+}
+
+.donate-dialog {
+  width: min(380px, calc(100vw - 28px));
+  max-height: calc(100vh - 28px);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  border: 1px solid var(--line, #2e333c);
+  border-radius: 14px;
+  background: var(--panel, #1c1f25);
+  color: var(--text, #e8eaee);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .6);
+}
+
+.donate-dialog::backdrop {
+  background: rgba(0, 0, 0, .65);
+}
+
+.donate-inner {
+  padding: 14px 16px 16px;
+}
+
+.donate-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.donate-head strong {
+  font-size: 14px;
+}
+
+.donate-close {
+  background: none;
+  border: 0;
+  color: var(--muted, #8b93a1);
+  font-size: 19px;
+  line-height: 1;
+  padding: 2px 7px;
+  cursor: pointer;
+}
+
+button.donate-close:hover {
+  background: none;
+  color: var(--text, #e8eaee);
+}
+
+.donate-lead {
+  margin: 5px 0 0;
+  color: var(--muted, #8b93a1);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.donate-row {
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px solid var(--line, #2e333c);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .02);
+}
+
+.donate-net {
+  margin-bottom: 6px;
+  color: var(--muted, #8b93a1);
+  font-size: 10.5px;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+}
+
+.donate-row code {
+  display: block;
+  padding: 8px;
+  border-radius: 6px;
+  background: rgba(43, 124, 255, .08);
+  color: #7eb0ff;
+  font: 11px/1.45 ui-monospace, Consolas, monospace;
+  word-break: break-all;
+  user-select: all;
+}
+
+.donate-copy {
+  margin-top: 8px;
+  padding: 5px 10px;
+  border: 1px solid var(--line, #2e333c);
+  border-radius: 6px;
+  background: var(--panel-2, #23272f);
+  color: var(--text, #e8eaee);
+  font: inherit;
+  font-size: 11.5px;
+  cursor: pointer;
+}
+
+.donate-copy:hover {
+  border-color: #3f4a5a;
+}
+
+.donate-copy.copied {
+  border-color: rgba(46, 204, 113, .5);
+  color: #2ecc71;
+}
+
+.donate-note {
+  margin: 12px 0 0;
+  color: var(--muted, #8b93a1);
+  font-size: 11px;
+  line-height: 1.45;
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="popup.css" />
+  <link rel="stylesheet" href="donate.css" />
+  <title>Drive Video Grabber</title>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img class="applogo" src="icons/icon.svg" alt="" />
+      <h1>Drive Grabber</h1>
+      <span class="dot" title="active"></span>
+    </div>
+    <span id="meta" class="meta">starting…</span>
+  </header>
+
+  <main id="list" class="list"></main>
+
+  <section class="manual">
+    <div class="labelrow">
+      <label for="paste">Paste a <code>videoplayback</code> URL</label>
+      <button id="pasteHelpBtn" class="helpdot" type="button"
+        aria-expanded="false" aria-controls="pasteHelp"
+        aria-label="How to find a videoplayback URL"
+        title="Click to see where to find this URL">?</button>
+    </div>
+    <div id="pasteHelp" class="helpbox" hidden>
+      You can get this URL from the browser <b>Network</b> tab. Open DevTools with
+      <b>F12</b>, play the video, filter for <code>videoplayback</code>, then right-click
+      the request and copy its URL.
+    </div>
+    <textarea id="paste" rows="3" spellcheck="false"
+      placeholder="https://rr2---sn-....c.drive.google.com/videoplayback?...&amp;range=...&amp;srfvp=1"></textarea>
+    <div class="row">
+      <button id="cleanBtn" class="ghost">Clean</button>
+      <button id="dlBtn" class="primary">Download</button>
+    </div>
+    <pre id="cleaned" class="cleaned mono"></pre>
+  </section>
+
+  <div id="hint" class="hint" hidden></div>
+
+  <div id="status" class="status" hidden>
+    <div id="statusText"></div>
+    <div id="bar" class="bar" hidden><i id="barFill"></i></div>
+  </div>
+
+  <footer>
+    <div class="row">
+      <button id="mergeBtn" class="primary wide" title="Download both tracks with Chrome, then merge them on the next page">Merge video + audio</button>
+    </div>
+    <div class="row">
+      <button id="localBtn" class="ghost wide" title="Pick files you already downloaded and merge them">Merge local files</button>
+      <button id="clearBtn" class="ghost">Clear</button>
+    </div>
+    <div class="donate-foot">
+      <button id="donateBtn" class="donate-open" type="button">Donate</button>
+    </div>
+  </footer>
+
+  <dialog id="donateDialog" class="donate-dialog" aria-labelledby="donateTitle">
+    <div class="donate-inner">
+      <div class="donate-head">
+        <strong id="donateTitle">Support this project</strong>
+        <button id="donateClose" class="donate-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <p class="donate-lead">This extension is free and open source. If it saved you time, you can send a small donation.</p>
+      <div class="donate-row">
+        <div class="donate-net">BEP20 (BNB Smart Chain)</div>
+        <code>0x93Fe3b08aF6Ed4dc92Cf81A50ca75f36FDCEcE93</code>
+        <button class="donate-copy" type="button" data-copy="0x93Fe3b08aF6Ed4dc92Cf81A50ca75f36FDCEcE93">Copy address</button>
+      </div>
+      <div class="donate-row">
+        <div class="donate-net">TRC20 (Tron)</div>
+        <code>TPTitWXdkDUE9BeUZvL8nZVKscMLZH9eog</code>
+        <button class="donate-copy" type="button" data-copy="TPTitWXdkDUE9BeUZvL8nZVKscMLZH9eog">Copy address</button>
+      </div>
+      <p class="donate-note">Send only assets on the matching network. A wrong network or coin can be lost.</p>
+    </div>
+  </dialog>
+
+  <script src="donate.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
